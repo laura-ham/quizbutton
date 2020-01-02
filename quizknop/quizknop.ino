@@ -30,18 +30,26 @@
 
 RF24 rf(A0, A1);
 
-#define quiz_master 0
+#define quiz_master 1
 #define knop_nummer 1
 
 uint8_t addresses[][6] = {"msr", "1sl", "2sl", "3sl", "4sl", "5sl"};
 
 // the setup function runs once when you press reset or power the board
 void setup() {
+  Serial.begin(9600);
+  Serial.println("Start");
   // initialize digital pin LED_BUILTIN as an output.
   pinMode(2, INPUT);
   pinMode(3, OUTPUT);
   digitalWrite(2, HIGH);
-  rf.begin();
+  if (!rf.begin()){
+    digitalWrite(3, HIGH);
+    Serial.println("Could not start RF module");
+    while(1);
+  }
+  Serial.println("RF module initialized");
+  
   rf.setAddressWidth(3);
   if (quiz_master == 1) {
    //rf.openWritingPipe(addresses[0]);
