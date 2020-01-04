@@ -1,0 +1,11 @@
+C:\Users\luuk.oudshoorn\Documents\GitHub\quizbutton\QuizButtonDesktop\QuizButtonDesktop\bin\Debug\QuizButtonDesktop.exe.config
+C:\Users\luuk.oudshoorn\Documents\GitHub\quizbutton\QuizButtonDesktop\QuizButtonDesktop\bin\Debug\QuizButtonDesktop.exe
+C:\Users\luuk.oudshoorn\Documents\GitHub\quizbutton\QuizButtonDesktop\QuizButtonDesktop\bin\Debug\QuizButtonDesktop.pdb
+C:\Users\luuk.oudshoorn\Documents\GitHub\quizbutton\QuizButtonDesktop\QuizButtonDesktop\obj\Debug\QuizButtonDesktop.csprojAssemblyReference.cache
+C:\Users\luuk.oudshoorn\Documents\GitHub\quizbutton\QuizButtonDesktop\QuizButtonDesktop\obj\Debug\QuizButtonDesktop.frmMain.resources
+C:\Users\luuk.oudshoorn\Documents\GitHub\quizbutton\QuizButtonDesktop\QuizButtonDesktop\obj\Debug\QuizButtonDesktop.Properties.Resources.resources
+C:\Users\luuk.oudshoorn\Documents\GitHub\quizbutton\QuizButtonDesktop\QuizButtonDesktop\obj\Debug\QuizButtonDesktop.csproj.GenerateResource.cache
+C:\Users\luuk.oudshoorn\Documents\GitHub\quizbutton\QuizButtonDesktop\QuizButtonDesktop\obj\Debug\QuizButtonDesktop.csproj.CoreCompileInputs.cache
+C:\Users\luuk.oudshoorn\Documents\GitHub\quizbutton\QuizButtonDesktop\QuizButtonDesktop\obj\Debug\QuizButtonDesktop.exe
+C:\Users\luuk.oudshoorn\Documents\GitHub\quizbutton\QuizButtonDesktop\QuizButtonDesktop\obj\Debug\QuizButtonDesktop.pdb
+C:\Users\luuk.oudshoorn\Documents\GitHub\quizbutton\QuizButtonDesktop\QuizButtonDesktop\obj\Debug\QuizButtonDesktop.frmButtonPressed.resources
