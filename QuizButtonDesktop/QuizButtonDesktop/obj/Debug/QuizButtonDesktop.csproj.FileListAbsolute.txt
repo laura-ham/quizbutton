@@ -9,3 +9,4 @@ C:\Users\luuk.oudshoorn\Documents\GitHub\quizbutton\QuizButtonDesktop\QuizButton
 C:\Users\luuk.oudshoorn\Documents\GitHub\quizbutton\QuizButtonDesktop\QuizButtonDesktop\obj\Debug\QuizButtonDesktop.exe
 C:\Users\luuk.oudshoorn\Documents\GitHub\quizbutton\QuizButtonDesktop\QuizButtonDesktop\obj\Debug\QuizButtonDesktop.pdb
 C:\Users\luuk.oudshoorn\Documents\GitHub\quizbutton\QuizButtonDesktop\QuizButtonDesktop\obj\Debug\QuizButtonDesktop.frmButtonPressed.resources
+C:\Users\luuk.oudshoorn\Documents\GitHub\quizbutton\QuizButtonDesktop\QuizButtonDesktop\obj\Debug\QuizButtonDesktop.TeamControl.resources

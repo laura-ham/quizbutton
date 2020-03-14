@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace QuizButtonDesktop
     public partial class frmMain : Form
     {
         List<Form> itemsToClose;
+        Quiz quiz;
 
         QuizButton masterButton = new QuizButton();
 
@@ -22,6 +24,25 @@ namespace QuizButtonDesktop
             InitializeComponent();
             refreshPortList();
             masterButton.LineReceived += MasterButton_LineReceived;
+
+            quiz = new Quiz();
+            quiz.Teams.Add(new Team());
+            quiz.Teams.Add(new Team());
+            DisplayQuiz();
+        }
+
+        private void DisplayQuiz()
+        {
+            tableLayoutPanel.Controls.Clear();
+            tableLayoutPanel.ColumnCount = quiz.Teams.Count;
+            int index = 0;
+            foreach(Team team in quiz.Teams)
+            {
+                TeamControl control = new TeamControl();
+                control.Team = team;
+                tableLayoutPanel.Controls.Add(control, index, 0);
+                index++;
+            }
         }
 
         private void MasterButton_LineReceived(string text)
@@ -105,6 +126,58 @@ namespace QuizButtonDesktop
         private void btnConnect_Click(object sender, EventArgs e)
         {
             masterButton.connect(cmbPort.SelectedItem.ToString());
+        }
+
+        private void numTeams_ValueChanged(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void saveConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.AddExtension = true;
+            sfd.DefaultExt = ".quizcfg";
+            sfd.OverwritePrompt = true;
+            if(sfd.ShowDialog() == DialogResult.OK)
+            {
+                using (StreamWriter sr = new StreamWriter(new FileStream(sfd.FileName, FileMode.Create), Encoding.ASCII))
+                {
+                    sr.Write(quiz.Serialize());
+                }
+            }
+        }
+
+        private void loadConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Quiz configuration (.quizcfg)|*.quizcfg";
+            ofd.AddExtension = true;
+            ofd.CheckFileExists = true;
+            ofd.Multiselect = false;
+            if(ofd.ShowDialog() == DialogResult.OK)
+            {
+                using (StreamReader sr = new StreamReader(ofd.FileName))
+                {
+                    quiz = Quiz.Deserialize(sr.ReadToEnd());
+                    DisplayQuiz();
+                }
+            }
+        }
+
+        private void newQuizToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void openQuizToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void saveQuizToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

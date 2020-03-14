@@ -60,7 +60,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Quiz.cs" />
     <Compile Include="QuizButton.cs" />
+    <Compile Include="Team.cs" />
+    <Compile Include="TeamControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TeamControl.Designer.cs">
+      <DependentUpon>TeamControl.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="frmButtonPressed.resx">
       <DependentUpon>frmButtonPressed.cs</DependentUpon>
     </EmbeddedResource>
@@ -76,6 +84,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="TeamControl.resx">
+      <DependentUpon>TeamControl.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
