@@ -18,6 +18,8 @@ namespace QuizButtonDesktop
 
         QuizButton masterButton = new QuizButton();
 
+        int mainScreenIndex;
+
         public frmMain()
         {
             itemsToClose = new List<Form>();
@@ -59,7 +61,7 @@ namespace QuizButtonDesktop
             }
         }
 
-        private void Form1_Resize(object sender, EventArgs e)
+        private void frmMain_Resize(object sender, EventArgs e)
         {
             if(this.WindowState == FormWindowState.Minimized)
             {
@@ -97,11 +99,15 @@ namespace QuizButtonDesktop
 
         private void showOverlay(string text, int milliseconds)
         {
-            frmButtonPressed buttonPressed = new frmButtonPressed(text);
-            buttonPressed.WindowState = FormWindowState.Maximized;
-            buttonPressed.Show();
-            buttonPressed.BringToFront();
-            buttonPressed.TopMost = true;
+            int index = 0;
+            for (int i = 0; i < Screen.AllScreens.Length; i++)
+            {
+                if(mainScreenIndex != i)
+                {
+                    index = i;
+                }
+            }
+            frmButtonPressed buttonPressed = new frmButtonPressed(text, index);
             itemsToClose.Add(buttonPressed);
             tmrCloseOverlay.Interval = 5000;
             tmrCloseOverlay.Start();
@@ -178,6 +184,25 @@ namespace QuizButtonDesktop
         private void saveQuizToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void frmMain_LocationChanged(object sender, EventArgs e)
+        {
+            if(this.WindowState != FormWindowState.Minimized)
+            {
+                for(int i=0;i<Screen.AllScreens.Length;i++)
+                {
+                    if(Screen.AllScreens[i].Bounds.Contains(this.Location + new Size(this.Width/2, this.Height/2)))
+                    {
+                        mainScreenIndex = i;
+                    }
+                }
+            }
+        }
+
+        private void btnTestOverlay_Click(object sender, EventArgs e)
+        {
+            showOverlay("Test", 1000);
         }
     }
 }

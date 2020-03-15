@@ -49,6 +49,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.loadConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnTestOverlay = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -99,6 +100,7 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.btnTestOverlay);
             this.splitContainer2.Panel1.Controls.Add(this.lblNumTeams);
             this.splitContainer2.Panel1.Controls.Add(this.numTeams);
             this.splitContainer2.Panel1.Controls.Add(this.lblRefresh);
@@ -217,42 +219,52 @@
             // newQuizToolStripMenuItem
             // 
             this.newQuizToolStripMenuItem.Name = "newQuizToolStripMenuItem";
-            this.newQuizToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newQuizToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.newQuizToolStripMenuItem.Text = "New quiz";
             this.newQuizToolStripMenuItem.Click += new System.EventHandler(this.newQuizToolStripMenuItem_Click);
             // 
             // openQuizToolStripMenuItem
             // 
             this.openQuizToolStripMenuItem.Name = "openQuizToolStripMenuItem";
-            this.openQuizToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openQuizToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.openQuizToolStripMenuItem.Text = "Open quiz";
             this.openQuizToolStripMenuItem.Click += new System.EventHandler(this.openQuizToolStripMenuItem_Click);
             // 
             // saveQuizToolStripMenuItem
             // 
             this.saveQuizToolStripMenuItem.Name = "saveQuizToolStripMenuItem";
-            this.saveQuizToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveQuizToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.saveQuizToolStripMenuItem.Text = "Save quiz";
             this.saveQuizToolStripMenuItem.Click += new System.EventHandler(this.saveQuizToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(172, 6);
             // 
             // loadConfigurationToolStripMenuItem
             // 
             this.loadConfigurationToolStripMenuItem.Name = "loadConfigurationToolStripMenuItem";
-            this.loadConfigurationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadConfigurationToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.loadConfigurationToolStripMenuItem.Text = "Load configuration";
             this.loadConfigurationToolStripMenuItem.Click += new System.EventHandler(this.loadConfigurationToolStripMenuItem_Click);
             // 
             // saveConfigurationToolStripMenuItem
             // 
             this.saveConfigurationToolStripMenuItem.Name = "saveConfigurationToolStripMenuItem";
-            this.saveConfigurationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveConfigurationToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.saveConfigurationToolStripMenuItem.Text = "Save configuration";
             this.saveConfigurationToolStripMenuItem.Click += new System.EventHandler(this.saveConfigurationToolStripMenuItem_Click);
+            // 
+            // btnTestOverlay
+            // 
+            this.btnTestOverlay.Location = new System.Drawing.Point(31, 67);
+            this.btnTestOverlay.Name = "btnTestOverlay";
+            this.btnTestOverlay.Size = new System.Drawing.Size(156, 23);
+            this.btnTestOverlay.TabIndex = 5;
+            this.btnTestOverlay.Text = "Test overlay";
+            this.btnTestOverlay.UseVisualStyleBackColor = true;
+            this.btnTestOverlay.Click += new System.EventHandler(this.btnTestOverlay_Click);
             // 
             // frmMain
             // 
@@ -264,7 +276,8 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMain";
             this.Text = "Form1";
-            this.Resize += new System.EventHandler(this.Form1_Resize);
+            this.LocationChanged += new System.EventHandler(this.frmMain_LocationChanged);
+            this.Resize += new System.EventHandler(this.frmMain_Resize);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -304,6 +317,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem loadConfigurationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveConfigurationToolStripMenuItem;
+        private System.Windows.Forms.Button btnTestOverlay;
     }
 }
 
