@@ -39,7 +39,11 @@
             this.lblButton = new System.Windows.Forms.Label();
             this.btnSetButton = new System.Windows.Forms.Button();
             this.lblButtonId = new System.Windows.Forms.Label();
+            this.numPoints = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnAddPoint = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picTeamImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPoints)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTeamName
@@ -140,14 +144,45 @@
             this.lblButtonId.AutoSize = true;
             this.lblButtonId.Location = new System.Drawing.Point(74, 177);
             this.lblButtonId.Name = "lblButtonId";
-            this.lblButtonId.Size = new System.Drawing.Size(43, 13);
+            this.lblButtonId.Size = new System.Drawing.Size(0, 13);
             this.lblButtonId.TabIndex = 10;
-            this.lblButtonId.Text = "--none--";
+            // 
+            // numPoints
+            // 
+            this.numPoints.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numPoints.Location = new System.Drawing.Point(3, 250);
+            this.numPoints.Name = "numPoints";
+            this.numPoints.Size = new System.Drawing.Size(117, 49);
+            this.numPoints.TabIndex = 11;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(6, 224);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(78, 25);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Points:";
+            // 
+            // btnAddPoint
+            // 
+            this.btnAddPoint.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddPoint.Location = new System.Drawing.Point(125, 250);
+            this.btnAddPoint.Name = "btnAddPoint";
+            this.btnAddPoint.Size = new System.Drawing.Size(66, 49);
+            this.btnAddPoint.TabIndex = 13;
+            this.btnAddPoint.Text = "+1";
+            this.btnAddPoint.UseVisualStyleBackColor = true;
             // 
             // TeamControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Controls.Add(this.btnAddPoint);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.numPoints);
             this.Controls.Add(this.lblButtonId);
             this.Controls.Add(this.btnSetButton);
             this.Controls.Add(this.lblButton);
@@ -160,8 +195,9 @@
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.lblTeamName);
             this.Name = "TeamControl";
-            this.Size = new System.Drawing.Size(203, 250);
+            this.Size = new System.Drawing.Size(203, 349);
             ((System.ComponentModel.ISupportInitialize)(this.picTeamImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPoints)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -180,5 +216,8 @@
         private System.Windows.Forms.Label lblButton;
         private System.Windows.Forms.Button btnSetButton;
         private System.Windows.Forms.Label lblButtonId;
+        private System.Windows.Forms.NumericUpDown numPoints;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnAddPoint;
     }
 }

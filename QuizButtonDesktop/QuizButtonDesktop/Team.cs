@@ -57,6 +57,8 @@ namespace QuizButtonDesktop
 
         public String ButtonId;
 
+        public int Score;
+
         public Team()
         {
             _soundData = new byte[0];
@@ -77,6 +79,20 @@ namespace QuizButtonDesktop
         {
             XmlSerializer deserializer = new XmlSerializer(typeof(TeamControl));
             return (TeamControl)deserializer.Deserialize(new StringReader(data));
+        }
+
+        public override bool Equals(object obj)
+        {
+            if(obj.GetType() != typeof(Team))
+            {
+                return false;
+            }
+            return ((Team)obj).GetHashCode() == this.GetHashCode();
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Serialize().GetHashCode();
         }
     }
 }

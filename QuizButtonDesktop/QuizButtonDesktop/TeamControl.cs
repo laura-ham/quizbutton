@@ -34,16 +34,19 @@ namespace QuizButtonDesktop
         {
             txtName.Text = _team.Name;
             picTeamImage.Image = _team.Image;
-            lblButtonId.Text = _team.ButtonId == "" ? "--none--" : _team.ButtonId;
+            lblButtonId.Text = _team.ButtonId;
+            numPoints.Value = _team.Score;
         }
 
         private void btnLoadTeamImage_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "PNG image (.png)|*.png";
-            ofd.AddExtension = true;
-            ofd.CheckFileExists = true;
-            ofd.Multiselect = false;
+            OpenFileDialog ofd = new OpenFileDialog()
+            {
+                Filter = "PNG image (.png)|*.png",
+                AddExtension = true,
+                CheckFileExists = true,
+                Multiselect = false
+            };
             if(ofd.ShowDialog() == DialogResult.OK)
             {
                 _team.Image = Image.FromFile(ofd.FileName);
@@ -53,11 +56,13 @@ namespace QuizButtonDesktop
 
         private void btnLoadSound_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "WAVE file (.wav)|*.wav";
-            ofd.AddExtension = true;
-            ofd.CheckFileExists = true;
-            ofd.Multiselect = false;
+            OpenFileDialog ofd = new OpenFileDialog()
+            {
+                Filter = "WAVE file (.wav)|*.wav",
+                AddExtension = true,
+                CheckFileExists = true,
+                Multiselect = false
+            };
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 using (FileStream fs = new FileStream(ofd.FileName, FileMode.Open))

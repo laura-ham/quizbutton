@@ -13,6 +13,9 @@ namespace QuizButtonDesktop
 {
     public partial class frmMain : Form
     {
+
+        String loadedConfiguration;
+
         List<Form> itemsToClose;
         Quiz quiz;
 
@@ -23,27 +26,63 @@ namespace QuizButtonDesktop
         public frmMain()
         {
             itemsToClose = new List<Form>();
+            loadedConfiguration = new Quiz().Serialize();
             InitializeComponent();
+
             refreshPortList();
             masterButton.LineReceived += MasterButton_LineReceived;
 
             quiz = new Quiz();
-            quiz.Teams.Add(new Team());
-            quiz.Teams.Add(new Team());
-            DisplayQuiz();
+
+            UpdateTeamDisplay();
         }
 
-        private void DisplayQuiz()
+        private void UpdateTeamDisplay()
         {
-            tableLayoutPanel.Controls.Clear();
-            tableLayoutPanel.ColumnCount = quiz.Teams.Count;
+            UpdateTeamCount();
+            flowLayoutPanel1.Controls.Clear();
             int index = 0;
             foreach(Team team in quiz.Teams)
             {
-                TeamControl control = new TeamControl();
-                control.Team = team;
-                tableLayoutPanel.Controls.Add(control, index, 0);
+                TeamControl control = new TeamControl() { Team = team };
+                flowLayoutPanel1.Controls.Add(control);
                 index++;
+            }
+        }
+
+        private void UpdateTeamCount()
+        {
+            if (quiz.Teams.Count > numTeams.Value)
+            {
+                //We need to remove a team
+                quiz.Teams.RemoveAt(quiz.Teams.Count - 1);
+            }
+            else if (quiz.Teams.Count < numTeams.Value)
+            {
+                //We need to add a team
+
+                //Check if there are more teams in the loaded configuration, we can recover them instead of loading new ones
+                Quiz loadedQuiz = Quiz.Deserialize(loadedConfiguration);
+                while (quiz.Teams.Count < numTeams.Value)
+                {
+                    if (loadedQuiz.Teams.Count > quiz.Teams.Count)
+                    {
+                        //We can recover a team
+                        foreach(Team team in loadedQuiz.Teams)
+                        {
+                            if(!quiz.Teams.Contains(team))
+                            {
+                                quiz.Teams.Add(team);
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //We need to make a new team
+                        quiz.Teams.Add(new Team() { Name = String.Format("Team {0}", quiz.Teams.Count + 1) });
+                    }
+                }
             }
         }
 
@@ -136,15 +175,17 @@ namespace QuizButtonDesktop
 
         private void numTeams_ValueChanged(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            UpdateTeamDisplay();
         }
 
         private void saveConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.AddExtension = true;
-            sfd.DefaultExt = ".quizcfg";
-            sfd.OverwritePrompt = true;
+            SaveFileDialog sfd = new SaveFileDialog()
+            {
+                AddExtension = true,
+                DefaultExt = ".quizcfg",
+                OverwritePrompt = true
+            };
             if(sfd.ShowDialog() == DialogResult.OK)
             {
                 using (StreamWriter sr = new StreamWriter(new FileStream(sfd.FileName, FileMode.Create), Encoding.ASCII))
@@ -156,17 +197,21 @@ namespace QuizButtonDesktop
 
         private void loadConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Quiz configuration (.quizcfg)|*.quizcfg";
-            ofd.AddExtension = true;
-            ofd.CheckFileExists = true;
-            ofd.Multiselect = false;
+            OpenFileDialog ofd = new OpenFileDialog()
+            {
+                Filter = "Quiz configuration (.quizcfg)|*.quizcfg",
+                AddExtension = true,
+                CheckFileExists = true,
+                Multiselect = false
+            };
             if(ofd.ShowDialog() == DialogResult.OK)
             {
                 using (StreamReader sr = new StreamReader(ofd.FileName))
                 {
                     quiz = Quiz.Deserialize(sr.ReadToEnd());
-                    DisplayQuiz();
+                    loadedConfiguration = quiz.Serialize();
+                    numTeams.Value = quiz.Teams.Count;
+                    UpdateTeamDisplay();
                 }
             }
         }
@@ -203,6 +248,35 @@ namespace QuizButtonDesktop
         private void btnTestOverlay_Click(object sender, EventArgs e)
         {
             showOverlay("Test", 1000);
+        }
+
+        private void frmMain_Activated(object sender, EventArgs e)
+        {
+            this.BackColor = Color.LightGreen;
+        }
+
+        private void frmMain_Deactivate(object sender, EventArgs e)
+        {
+            this.BackColor = Color.LightPink;
+        }
+
+        private void btnFocusOnQuiz_Click(object sender, EventArgs e)
+        {
+            ProcessHelper.FocusPowerpoint();
+        }
+
+        private void frmMain_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.PageDown)
+            {
+                ProcessHelper.FocusPowerpoint();
+                ProcessHelper.PowerPointNext();
+            }
+            else if(e.KeyCode == Keys.PageUp)
+            {
+                ProcessHelper.FocusPowerpoint();
+                ProcessHelper.PowerPointPrevious();
+            }
         }
     }
 }
