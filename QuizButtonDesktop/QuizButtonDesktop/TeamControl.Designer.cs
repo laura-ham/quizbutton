@@ -154,6 +154,7 @@
             this.numPoints.Name = "numPoints";
             this.numPoints.Size = new System.Drawing.Size(117, 49);
             this.numPoints.TabIndex = 11;
+            this.numPoints.ValueChanged += new System.EventHandler(this.numPoints_ValueChanged);
             // 
             // label1
             // 
@@ -174,6 +175,7 @@
             this.btnAddPoint.TabIndex = 13;
             this.btnAddPoint.Text = "+1";
             this.btnAddPoint.UseVisualStyleBackColor = true;
+            this.btnAddPoint.Click += new System.EventHandler(this.btnAddPoint_Click);
             // 
             // TeamControl
             // 

@@ -17,7 +17,7 @@ namespace QuizButtonDesktop
             InitializeComponent();
         }
 
-        public frmButtonPressed(string text, int index) : this()
+        public frmButtonPressed(string text, int index, int timeout) : this()
         {
             lblText.Text = text;
             if(index < 0 || index > Screen.AllScreens.Length - 1)
@@ -32,12 +32,21 @@ namespace QuizButtonDesktop
             BringToFront();
             TopMost = true;
             lblText_Resize(this, null);
+
+            tmrCloseOverlay.Interval = timeout;
+            tmrCloseOverlay.Start();
         }
 
         private void lblText_Resize(object sender, EventArgs e)
         {
             lblText.Size = splitContainer1.Panel2.ClientSize;
             lblText.Font = new Font("Arial", splitContainer1.Panel1.Height * 0.5f, FontStyle.Bold, GraphicsUnit.Pixel);
+        }
+
+        private void tmrCloseOverlay_Tick(object sender, EventArgs e)
+        {
+            this.Close();
+            this.Dispose();
         }
     }
 }

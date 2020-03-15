@@ -85,5 +85,15 @@ namespace QuizButtonDesktop
         {
             _team.Name = txtName.Text;
         }
+
+        private void numPoints_ValueChanged(object sender, EventArgs e)
+        {
+            _team.Score = (int)numPoints.Value;
+        }
+
+        private void btnAddPoint_Click(object sender, EventArgs e)
+        {
+            numPoints.Value++;
+        }
     }
 }

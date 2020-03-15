@@ -31,9 +31,10 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.tmrCloseOverlay = new System.Windows.Forms.Timer(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.btnShowScore = new System.Windows.Forms.Button();
+            this.btnFocusOnQuiz = new System.Windows.Forms.Button();
             this.btnTestOverlay = new System.Windows.Forms.Button();
             this.lblNumTeams = new System.Windows.Forms.Label();
             this.numTeams = new System.Windows.Forms.NumericUpDown();
@@ -41,6 +42,7 @@
             this.cmbPort = new System.Windows.Forms.ComboBox();
             this.btnConnect = new System.Windows.Forms.Button();
             this.txtConsole = new System.Windows.Forms.TextBox();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newQuizToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,9 +51,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.loadConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnFocusOnQuiz = new System.Windows.Forms.Button();
-            this.btnShowScore = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -71,10 +70,6 @@
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
             this.notifyIcon1.Text = "Quiz Button";
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
-            // 
-            // tmrCloseOverlay
-            // 
-            this.tmrCloseOverlay.Tick += new System.EventHandler(this.tmrCloseOverlay_Tick);
             // 
             // splitContainer1
             // 
@@ -117,6 +112,26 @@
             this.splitContainer2.Size = new System.Drawing.Size(996, 172);
             this.splitContainer2.SplitterDistance = 398;
             this.splitContainer2.TabIndex = 0;
+            // 
+            // btnShowScore
+            // 
+            this.btnShowScore.Location = new System.Drawing.Point(13, 124);
+            this.btnShowScore.Name = "btnShowScore";
+            this.btnShowScore.Size = new System.Drawing.Size(219, 23);
+            this.btnShowScore.TabIndex = 7;
+            this.btnShowScore.Text = "Show score";
+            this.btnShowScore.UseVisualStyleBackColor = true;
+            this.btnShowScore.Click += new System.EventHandler(this.btnShowScore_Click);
+            // 
+            // btnFocusOnQuiz
+            // 
+            this.btnFocusOnQuiz.Location = new System.Drawing.Point(12, 94);
+            this.btnFocusOnQuiz.Name = "btnFocusOnQuiz";
+            this.btnFocusOnQuiz.Size = new System.Drawing.Size(220, 23);
+            this.btnFocusOnQuiz.TabIndex = 6;
+            this.btnFocusOnQuiz.Text = "Focus on quiz";
+            this.btnFocusOnQuiz.UseVisualStyleBackColor = true;
+            this.btnFocusOnQuiz.Click += new System.EventHandler(this.btnFocusOnQuiz_Click);
             // 
             // btnTestOverlay
             // 
@@ -193,6 +208,17 @@
             this.txtConsole.Size = new System.Drawing.Size(594, 172);
             this.txtConsole.TabIndex = 0;
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(996, 424);
+            this.flowLayoutPanel1.TabIndex = 1;
+            this.flowLayoutPanel1.WrapContents = false;
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -256,36 +282,6 @@
             this.saveConfigurationToolStripMenuItem.Text = "Save configuration";
             this.saveConfigurationToolStripMenuItem.Click += new System.EventHandler(this.saveConfigurationToolStripMenuItem_Click);
             // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(996, 424);
-            this.flowLayoutPanel1.TabIndex = 1;
-            this.flowLayoutPanel1.WrapContents = false;
-            // 
-            // btnFocusOnQuiz
-            // 
-            this.btnFocusOnQuiz.Location = new System.Drawing.Point(12, 94);
-            this.btnFocusOnQuiz.Name = "btnFocusOnQuiz";
-            this.btnFocusOnQuiz.Size = new System.Drawing.Size(220, 23);
-            this.btnFocusOnQuiz.TabIndex = 6;
-            this.btnFocusOnQuiz.Text = "Focus on quiz";
-            this.btnFocusOnQuiz.UseVisualStyleBackColor = true;
-            this.btnFocusOnQuiz.Click += new System.EventHandler(this.btnFocusOnQuiz_Click);
-            // 
-            // btnShowScore
-            // 
-            this.btnShowScore.Location = new System.Drawing.Point(13, 124);
-            this.btnShowScore.Name = "btnShowScore";
-            this.btnShowScore.Size = new System.Drawing.Size(219, 23);
-            this.btnShowScore.TabIndex = 7;
-            this.btnShowScore.Text = "Show score";
-            this.btnShowScore.UseVisualStyleBackColor = true;
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -324,7 +320,6 @@
         #endregion
 
         private System.Windows.Forms.NotifyIcon notifyIcon1;
-        private System.Windows.Forms.Timer tmrCloseOverlay;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.ComboBox cmbPort;

@@ -15,8 +15,7 @@ namespace QuizButtonDesktop
     {
 
         String loadedConfiguration;
-
-        List<Form> itemsToClose;
+        
         Quiz quiz;
 
         QuizButton masterButton = new QuizButton();
@@ -25,7 +24,6 @@ namespace QuizButtonDesktop
 
         public frmMain()
         {
-            itemsToClose = new List<Form>();
             loadedConfiguration = new Quiz().Serialize();
             InitializeComponent();
 
@@ -136,31 +134,22 @@ namespace QuizButtonDesktop
             notifyIcon1.Visible = false;
         }
 
-        private void showOverlay(string text, int milliseconds)
+        private int OverlayScreenIndex()
         {
             int index = 0;
             for (int i = 0; i < Screen.AllScreens.Length; i++)
             {
-                if(mainScreenIndex != i)
+                if (mainScreenIndex != i)
                 {
                     index = i;
                 }
             }
-            frmButtonPressed buttonPressed = new frmButtonPressed(text, index);
-            itemsToClose.Add(buttonPressed);
-            tmrCloseOverlay.Interval = 5000;
-            tmrCloseOverlay.Start();
+            return index;
         }
 
-        private void tmrCloseOverlay_Tick(object sender, EventArgs e)
+        private void showOverlay(string text, int milliseconds)
         {
-            tmrCloseOverlay.Stop();
-            foreach(Form form in itemsToClose)
-            {
-                form.Close();
-                form.Dispose();
-            }
-            itemsToClose.Clear();
+            frmButtonPressed buttonPressed = new frmButtonPressed(text, OverlayScreenIndex(), 5000);
         }
 
         private void lblRefresh_Click(object sender, EventArgs e)
@@ -277,6 +266,11 @@ namespace QuizButtonDesktop
                 ProcessHelper.FocusPowerpoint();
                 ProcessHelper.PowerPointPrevious();
             }
+        }
+
+        private void btnShowScore_Click(object sender, EventArgs e)
+        {
+            frmShowScore showScore = new frmShowScore(quiz.Teams, OverlayScreenIndex(), 2000, 5000);
         }
     }
 }

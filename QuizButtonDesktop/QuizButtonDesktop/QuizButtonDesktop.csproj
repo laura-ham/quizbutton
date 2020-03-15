@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmShowScore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmShowScore.Designer.cs">
+      <DependentUpon>frmShowScore.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProcessHelper.cs" />
     <Compile Include="frmButtonPressed.cs">
       <SubType>Form</SubType>
@@ -70,6 +76,15 @@
     <Compile Include="TeamControl.Designer.cs">
       <DependentUpon>TeamControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="TeamScorePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TeamScorePanel.Designer.cs">
+      <DependentUpon>TeamScorePanel.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="frmShowScore.resx">
+      <DependentUpon>frmShowScore.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmButtonPressed.resx">
       <DependentUpon>frmButtonPressed.cs</DependentUpon>
     </EmbeddedResource>
@@ -87,6 +102,9 @@
     </Compile>
     <EmbeddedResource Include="TeamControl.resx">
       <DependentUpon>TeamControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TeamScorePanel.resx">
+      <DependentUpon>TeamScorePanel.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

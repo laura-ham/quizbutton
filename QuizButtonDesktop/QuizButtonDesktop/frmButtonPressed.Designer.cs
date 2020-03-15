@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.lblText = new System.Windows.Forms.Label();
+            this.tmrCloseOverlay = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -67,6 +69,10 @@
             this.lblText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblText.Resize += new System.EventHandler(this.lblText_Resize);
             // 
+            // tmrCloseOverlay
+            // 
+            this.tmrCloseOverlay.Tick += new System.EventHandler(this.tmrCloseOverlay_Tick);
+            // 
             // frmButtonPressed
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -89,5 +95,6 @@
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Label lblText;
+        private System.Windows.Forms.Timer tmrCloseOverlay;
     }
 }
