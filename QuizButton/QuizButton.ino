@@ -1,12 +1,20 @@
+//#define RFNANO 1
+
 #include <EEPROM.h>
 
 #include <DigitalIO.h>
 #include <printf.h>
 #include <nRF24L01.h>
-#include <RF24_config.h>
-#include <RF24.h>
 
-RF24 rf(A0, A1);
+#ifdef RFNANO
+  #include <RF24_config.h>
+  #include <RF24.h>
+  RF24 rf(10, 9);
+#else
+  #include <RF24_config.h>
+  #include <RF24.h>
+  RF24 rf(A0, A1);
+#endif
 
 #define ADDRESS_EEPROM 0
 #define MASTER_EEPROM 1
@@ -32,6 +40,30 @@ uint8_t lineCount;
 bool lineOverflow = false;
 long lastCharTimestamp;
 
+void setupModule() {
+    if (!rf.begin()){
+      digitalWrite(3, HIGH);
+      Serial.println("Could not start RF module");
+      while(1);
+    }
+    Serial.println("RF module initialized");
+    rf.setAddressWidth(3);
+    rf.setChannel(10);
+    rf.openWritingPipe(masterAddress);
+    rf.openReadingPipe(1, address);
+    rf.openReadingPipe(2, broadcast);
+  
+    rf.setAutoAck(1);                    // Ensure autoACK is enabled
+    rf.enableAckPayload();               // Allow optional ack payloads
+    rf.enableDynamicPayloads();          // Ack payloads are dynamic payloads
+    rf.setRetries(0,15);                 // Smallest time between retries, max no. of retries
+    rf.setPayloadSize(1);                // Here we are sending 1-byte payloads to test the call-response speed
+    fdevopen(&my_putc, 0);
+    //rf.printDetails();                   // Dump the configuration of the rf unit for debugging
+    
+    rf.startListening();
+}
+
 // the setup function runs once when you press reset or power the board
 void setup() {
   Serial.begin(115200);
@@ -53,26 +85,7 @@ void setup() {
   pinMode(3, OUTPUT);
   digitalWrite(2, HIGH);
   digitalWrite(3, LOW);
-  if (!rf.begin()){
-    digitalWrite(3, HIGH);
-    Serial.println("Could not start RF module");
-    while(1);
-  }
-  Serial.println("RF module initialized");
-  rf.setAddressWidth(3);
-  rf.openWritingPipe(masterAddress);
-  rf.openReadingPipe(1, address);
-  rf.openReadingPipe(2, broadcast);
-
-  rf.setAutoAck(1);                    // Ensure autoACK is enabled
-  rf.enableAckPayload();               // Allow optional ack payloads
-  rf.enableDynamicPayloads();          // Ack payloads are dynamic payloads
-  rf.setRetries(0,15);                 // Smallest time between retries, max no. of retries
-  rf.setPayloadSize(1);                // Here we are sending 1-byte payloads to test the call-response speed
-  fdevopen(&my_putc, 0);
-  //rf.printDetails();                   // Dump the configuration of the rf unit for debugging
-  
-  rf.startListening();
+  setupModule();
 
   //Startup as master if button is pressed at startup
   if(!digitalRead(2))
@@ -105,13 +118,13 @@ void loop() {
   if (master) 
   {
     if (rf.available()) {
-      uint8_t data;
-      rf.read(&data, 1);
+      char line[] = "Line claimed: 0";
+      rf.read(&line[sizeof(line)-2], 1);
       digitalWrite(3, HIGH);
-      Serial.print("Line claimed: ");
-      Serial.println(data);
+      Serial.println(line);
       delay(TIMEOUT);
       //Flush rf
+      uint8_t data;
       while(rf.available())
       {
         rf.read(&data, 1);
