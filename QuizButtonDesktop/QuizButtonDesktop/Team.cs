@@ -11,8 +11,6 @@ namespace QuizButtonDesktop
 {
     public class Team
     {
-        public event Action BindButton;
-
         public String Name;
 
         [XmlElement("Image")]
@@ -64,21 +62,21 @@ namespace QuizButtonDesktop
             _soundData = new byte[0];
             Image = null;
         }
-
+        
         public String Serialize()
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(TeamControl));
+            XmlSerializer serializer = new XmlSerializer(typeof(Team));
             using (StringWriter writer = new StringWriter())
             {
                 serializer.Serialize(writer, this);
                 return writer.ToString();
             }
         }
-
-        public static TeamControl DeSerialize(String data)
+        
+        public static Team DeSerialize(String data)
         {
-            XmlSerializer deserializer = new XmlSerializer(typeof(TeamControl));
-            return (TeamControl)deserializer.Deserialize(new StringReader(data));
+            XmlSerializer deserializer = new XmlSerializer(typeof(Team));
+            return (Team)deserializer.Deserialize(new StringReader(data));
         }
 
         public override bool Equals(object obj)
@@ -92,7 +90,7 @@ namespace QuizButtonDesktop
 
         public override int GetHashCode()
         {
-            return this.Serialize().GetHashCode();
+            return this.Name.GetHashCode();
         }
     }
 }

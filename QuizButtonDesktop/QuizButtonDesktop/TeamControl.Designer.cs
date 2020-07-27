@@ -37,7 +37,7 @@
             this.btnLoadSound = new System.Windows.Forms.Button();
             this.btnPlaySound = new System.Windows.Forms.Button();
             this.lblButton = new System.Windows.Forms.Label();
-            this.btnSetButton = new System.Windows.Forms.Button();
+            this.btnChooseButton = new System.Windows.Forms.Button();
             this.numPoints = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.btnAddPoint = new System.Windows.Forms.Button();
@@ -130,15 +130,15 @@
             this.lblButton.TabIndex = 8;
             this.lblButton.Text = "Button";
             // 
-            // btnSetButton
+            // btnChooseButton
             // 
-            this.btnSetButton.Location = new System.Drawing.Point(45, 232);
-            this.btnSetButton.Name = "btnSetButton";
-            this.btnSetButton.Size = new System.Drawing.Size(52, 23);
-            this.btnSetButton.TabIndex = 9;
-            this.btnSetButton.Text = "Set";
-            this.btnSetButton.UseVisualStyleBackColor = true;
-            this.btnSetButton.Click += new System.EventHandler(this.btnSetButton_Click);
+            this.btnChooseButton.Location = new System.Drawing.Point(45, 232);
+            this.btnChooseButton.Name = "btnChooseButton";
+            this.btnChooseButton.Size = new System.Drawing.Size(52, 23);
+            this.btnChooseButton.TabIndex = 9;
+            this.btnChooseButton.Text = "Choose";
+            this.btnChooseButton.UseVisualStyleBackColor = true;
+            this.btnChooseButton.Click += new System.EventHandler(this.btnChooseButton_Click);
             // 
             // numPoints
             // 
@@ -176,6 +176,7 @@
             this.txtButtonId.Name = "txtButtonId";
             this.txtButtonId.Size = new System.Drawing.Size(38, 20);
             this.txtButtonId.TabIndex = 14;
+            this.txtButtonId.TextChanged += new System.EventHandler(this.txtButtonId_TextChanged);
             // 
             // TeamControl
             // 
@@ -187,7 +188,7 @@
             this.Controls.Add(this.btnAddPoint);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.numPoints);
-            this.Controls.Add(this.btnSetButton);
+            this.Controls.Add(this.btnChooseButton);
             this.Controls.Add(this.lblButton);
             this.Controls.Add(this.btnPlaySound);
             this.Controls.Add(this.btnLoadSound);
@@ -218,7 +219,7 @@
         private System.Windows.Forms.Button btnLoadSound;
         private System.Windows.Forms.Button btnPlaySound;
         private System.Windows.Forms.Label lblButton;
-        private System.Windows.Forms.Button btnSetButton;
+        private System.Windows.Forms.Button btnChooseButton;
         private System.Windows.Forms.Label lblButtonId;
         private System.Windows.Forms.NumericUpDown numPoints;
         private System.Windows.Forms.Label label1;

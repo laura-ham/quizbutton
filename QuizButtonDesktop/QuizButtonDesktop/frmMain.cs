@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -90,10 +91,26 @@ namespace QuizButtonDesktop
                 this.Invoke(new Action<string>(MasterButton_LineReceived), text);
                 return;
             }
-            txtConsole.Text += text;
+            txtConsole.Text += text + "\r\n";
             if (text.StartsWith("Line claimed: "))
             {
-                showOverlay(String.Concat(text.Skip("Line claimed: ".Length)), 5000);
+                String id = String.Concat(text.Skip("Line claimed: ".Length).Take(1));
+                Team team = quiz.Teams.FirstOrDefault(x => x.ButtonId != null && x.ButtonId.Equals(id));
+                if (team == null)
+                {
+                    showOverlay(id, null, 5000);
+                }
+                else
+                {
+                    if (team.Sound != null && team.Sound.Length > 0)
+                    {
+                        using (SoundPlayer player = new SoundPlayer(new MemoryStream(team.Sound)))
+                        {
+                            player.Play();
+                        }
+                    }
+                    showOverlay(team.Name, team.Image, 5000);
+                }
             }
         }
 
@@ -146,9 +163,9 @@ namespace QuizButtonDesktop
             return index;
         }
 
-        private void showOverlay(string text, int milliseconds)
+        private void showOverlay(string text, Image image, int milliseconds)
         {
-            frmButtonPressed buttonPressed = new frmButtonPressed(text, OverlayScreenIndex(), 5000);
+            frmButtonPressed buttonPressed = new frmButtonPressed(text, image, OverlayScreenIndex(), 5000);
         }
 
         private void lblRefresh_Click(object sender, EventArgs e)
@@ -235,7 +252,7 @@ namespace QuizButtonDesktop
 
         private void btnTestOverlay_Click(object sender, EventArgs e)
         {
-            showOverlay("Test", 1000);
+            showOverlay("Test", null, 1000);
         }
 
         private void frmMain_Activated(object sender, EventArgs e)

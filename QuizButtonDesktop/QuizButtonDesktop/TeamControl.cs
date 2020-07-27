@@ -99,7 +99,7 @@ namespace QuizButtonDesktop
             numPoints.Value++;
         }
 
-        private void btnSetButton_Click(object sender, EventArgs e)
+        private void btnChooseButton_Click(object sender, EventArgs e)
         {
             KeySetForm ksf = new KeySetForm();
             if(ksf.ShowDialog() == DialogResult.OK)
@@ -107,6 +107,11 @@ namespace QuizButtonDesktop
                 _team.ButtonId = ksf.Key;
                 txtButtonId.Text = ksf.Key;
             }
+        }
+
+        private void txtButtonId_TextChanged(object sender, EventArgs e)
+        {
+            _team.ButtonId = txtButtonId.Text;
         }
     }
 }

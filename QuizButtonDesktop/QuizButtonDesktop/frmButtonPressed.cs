@@ -17,9 +17,10 @@ namespace QuizButtonDesktop
             InitializeComponent();
         }
 
-        public frmButtonPressed(string text, int index, int timeout) : this()
+        public frmButtonPressed(string text, Image image, int index, int timeout) : this()
         {
             lblText.Text = text;
+            pictureBox1.Image = image;
             if(index < 0 || index > Screen.AllScreens.Length - 1)
             {
                 throw new ArgumentOutOfRangeException();
@@ -31,6 +32,7 @@ namespace QuizButtonDesktop
             Size = Screen.AllScreens[index].Bounds.Size;
             BringToFront();
             TopMost = true;
+            splitContainer2.SplitterDistance = splitContainer2.Height;
             lblText_Resize(this, null);
 
             tmrCloseOverlay.Interval = timeout;
@@ -39,8 +41,8 @@ namespace QuizButtonDesktop
 
         private void lblText_Resize(object sender, EventArgs e)
         {
-            lblText.Size = splitContainer1.Panel2.ClientSize;
-            lblText.Font = new Font("Arial", splitContainer1.Panel1.Height * 0.5f, FontStyle.Bold, GraphicsUnit.Pixel);
+            lblText.Size = splitContainer2.Panel2.ClientSize;
+            lblText.Font = new Font("Arial", splitContainer1.Panel1.Height * 0.35f, FontStyle.Bold, GraphicsUnit.Pixel);
         }
 
         private void tmrCloseOverlay_Tick(object sender, EventArgs e)
