@@ -29,13 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.tmrCloseOverlay = new System.Windows.Forms.Timer(this.components);
             this.tmrNextTeam = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
-            // 
-            // tmrCloseOverlay
-            // 
-            this.tmrCloseOverlay.Tick += new System.EventHandler(this.tmrCloseOverlay_Tick);
             // 
             // tmrNextTeam
             // 
@@ -48,16 +43,16 @@
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(800, 480);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.KeyPreview = true;
             this.Name = "frmShowScore";
             this.Text = "frmButtonPressed";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmShowScore_KeyDown);
             this.Resize += new System.EventHandler(this.frmShowScore_Resize);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Timer tmrCloseOverlay;
         private System.Windows.Forms.Timer tmrNextTeam;
     }
 }

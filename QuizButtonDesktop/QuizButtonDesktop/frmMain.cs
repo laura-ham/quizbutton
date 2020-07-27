@@ -13,7 +13,6 @@ namespace QuizButtonDesktop
 {
     public partial class frmMain : Form
     {
-
         String loadedConfiguration;
         
         Quiz quiz;
@@ -28,7 +27,7 @@ namespace QuizButtonDesktop
             InitializeComponent();
 
             refreshPortList();
-            masterButton.LineReceived += MasterButton_LineReceived;
+            QuizButton.LineReceived += MasterButton_LineReceived;
 
             quiz = new Quiz();
 
@@ -50,12 +49,12 @@ namespace QuizButtonDesktop
 
         private void UpdateTeamCount()
         {
-            if (quiz.Teams.Count > numTeams.Value)
+            while (quiz.Teams.Count > numTeams.Value)
             {
                 //We need to remove a team
                 quiz.Teams.RemoveAt(quiz.Teams.Count - 1);
             }
-            else if (quiz.Teams.Count < numTeams.Value)
+            while (quiz.Teams.Count < numTeams.Value)
             {
                 //We need to add a team
 
@@ -270,7 +269,7 @@ namespace QuizButtonDesktop
 
         private void btnShowScore_Click(object sender, EventArgs e)
         {
-            frmShowScore showScore = new frmShowScore(quiz.Teams, OverlayScreenIndex(), 2000, 5000);
+            frmShowScore showScore = new frmShowScore(quiz.Teams, OverlayScreenIndex(), (int)numScoreDelay.Value);
         }
     }
 }

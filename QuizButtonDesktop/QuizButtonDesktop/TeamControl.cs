@@ -34,7 +34,7 @@ namespace QuizButtonDesktop
         {
             txtName.Text = _team.Name;
             picTeamImage.Image = _team.Image;
-            lblButtonId.Text = _team.ButtonId;
+            txtButtonId.Text = _team.ButtonId;
             numPoints.Value = _team.Score;
         }
 
@@ -75,9 +75,12 @@ namespace QuizButtonDesktop
 
         private void btnPlaySound_Click(object sender, EventArgs e)
         {
-            using (SoundPlayer player = new SoundPlayer(new MemoryStream(_team.Sound)))
+            if (_team.Sound != null && _team.Sound.Length > 0)
             {
-                player.Play();
+                using (SoundPlayer player = new SoundPlayer(new MemoryStream(_team.Sound)))
+                {
+                    player.Play();
+                }
             }
         }
 
@@ -94,6 +97,16 @@ namespace QuizButtonDesktop
         private void btnAddPoint_Click(object sender, EventArgs e)
         {
             numPoints.Value++;
+        }
+
+        private void btnSetButton_Click(object sender, EventArgs e)
+        {
+            KeySetForm ksf = new KeySetForm();
+            if(ksf.ShowDialog() == DialogResult.OK)
+            {
+                _team.ButtonId = ksf.Key;
+                txtButtonId.Text = ksf.Key;
+            }
         }
     }
 }

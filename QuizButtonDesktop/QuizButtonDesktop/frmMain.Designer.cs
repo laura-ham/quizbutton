@@ -33,6 +33,8 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.label1 = new System.Windows.Forms.Label();
+            this.numScoreDelay = new System.Windows.Forms.NumericUpDown();
             this.btnShowScore = new System.Windows.Forms.Button();
             this.btnFocusOnQuiz = new System.Windows.Forms.Button();
             this.btnTestOverlay = new System.Windows.Forms.Button();
@@ -59,6 +61,7 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numScoreDelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTeams)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -97,6 +100,8 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.label1);
+            this.splitContainer2.Panel1.Controls.Add(this.numScoreDelay);
             this.splitContainer2.Panel1.Controls.Add(this.btnShowScore);
             this.splitContainer2.Panel1.Controls.Add(this.btnFocusOnQuiz);
             this.splitContainer2.Panel1.Controls.Add(this.btnTestOverlay);
@@ -112,6 +117,32 @@
             this.splitContainer2.Size = new System.Drawing.Size(996, 172);
             this.splitContainer2.SplitterDistance = 398;
             this.splitContainer2.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(257, 129);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(34, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Delay";
+            // 
+            // numScoreDelay
+            // 
+            this.numScoreDelay.Increment = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.numScoreDelay.Location = new System.Drawing.Point(297, 127);
+            this.numScoreDelay.Maximum = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
+            this.numScoreDelay.Name = "numScoreDelay";
+            this.numScoreDelay.Size = new System.Drawing.Size(88, 20);
+            this.numScoreDelay.TabIndex = 8;
             // 
             // btnShowScore
             // 
@@ -214,6 +245,7 @@
             this.flowLayoutPanel1.AutoSize = true;
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(996, 424);
             this.flowLayoutPanel1.TabIndex = 1;
@@ -309,6 +341,7 @@
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numScoreDelay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTeams)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -340,6 +373,8 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnFocusOnQuiz;
         private System.Windows.Forms.Button btnShowScore;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown numScoreDelay;
     }
 }
 

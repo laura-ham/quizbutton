@@ -12,7 +12,7 @@ namespace QuizButtonDesktop
     public class QuizButton
     {
         public delegate void MessageHandler(String text);
-        public event MessageHandler LineReceived;
+        public static event MessageHandler LineReceived;
 
         SerialPort port;
         private List<char> incomingData;

@@ -17,9 +17,10 @@ namespace QuizButtonDesktop
         public frmShowScore()
         {
             InitializeComponent();
+            this.Focus();
         }
 
-        public frmShowScore(List<Team> teams, int index, int teamDelay, int lastDelay) : this()
+        public frmShowScore(List<Team> teams, int index, int teamDelay) : this()
         {
             if(index < 0 || index > Screen.AllScreens.Length - 1)
             {
@@ -31,7 +32,10 @@ namespace QuizButtonDesktop
             foreach (Team team in this.teams)
             {
                 TeamScorePanel panel = new TeamScorePanel(team.Image, team.Name, team.Score);
-                panel.Visible = false;
+                if (teamDelay > 0)
+                {
+                    panel.Visible = false;
+                }
                 this.Controls.Add(panel);
             }
             WindowState = FormWindowState.Normal;
@@ -44,22 +48,42 @@ namespace QuizButtonDesktop
             
             frmShowScore_Resize(this, null);
 
-            tmrNextTeam.Interval = teamDelay;
-            tmrNextTeam.Start();
-
-            tmrCloseOverlay.Interval = teamDelay * (teams.Count - 1) + lastDelay;
-            tmrCloseOverlay.Start();
+            if (teamDelay > 0)
+            {
+                tmrNextTeam.Interval = teamDelay;
+                tmrNextTeam.Start();
+            }
         }
 
         private void frmShowScore_Resize(object sender, EventArgs e)
         {
-            float partHeight = this.Height / teams.Count;
-            float teamHeight = Math.Min(partHeight, this.Width / 4);
             for (int i = 0; i < Controls.Count; i++)
             {
-                int y = (int)Math.Round(i * partHeight + (partHeight - teamHeight) / 2);
-                Controls[i].Location = new Point(0, y);
-                Controls[i].Size = new Size(this.Width, (int)teamHeight);
+                int x = 0, y, width;
+                float teamHeight;
+                if (teams.Count <= 8)
+                {
+                    //One column
+                    float partHeight = this.Height / teams.Count;
+                    //Don't let the score get too big when there's only a few teams
+                    teamHeight = Math.Min(partHeight, this.Width / 4);
+                    //Always space the teams evenly across the screen, even if they have been made smaller
+                    y = (int)Math.Round(i * partHeight + (partHeight - teamHeight) / 2);
+                    width = this.Width;
+                }
+                else
+                {
+                    int rows = (teams.Count + (teams.Count % 2)) / 2;
+                    //Two columns
+                    //Always have an even number of spots
+                    //Because there are at least 9 teams, we don't need to scale anything down
+                    teamHeight = this.Height / rows;
+                    y = (int)Math.Round((i % rows) * teamHeight);
+                    x = i < rows ? 0 : this.Width / 2;
+                    width = this.Width / 2;
+                }
+                Controls[i].Location = new Point(x, y);
+                Controls[i].Size = new Size(width, (int)teamHeight);
             }
         }
 
@@ -82,6 +106,15 @@ namespace QuizButtonDesktop
                 index--;
             }
             tmrNextTeam.Stop();
+        }
+
+        private void frmShowScore_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.PageDown || e.KeyCode == Keys.PageUp || e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+                this.Dispose();
+            }
         }
     }
 }
