@@ -29,13 +29,15 @@ namespace QuizButtonDesktop
 
             this.teams = teams.OrderByDescending(x => x.Score).ToList<Team>();
 
+            int i = 0;
             foreach (Team team in this.teams)
             {
                 TeamScorePanel panel = new TeamScorePanel(team.Image, team.Name, team.Score);
-                if (teamDelay > 0)
+                if (teamDelay > 0 || i < 3)
                 {
                     panel.Visible = false;
                 }
+                i++;
                 this.Controls.Add(panel);
             }
             WindowState = FormWindowState.Normal;
@@ -95,25 +97,36 @@ namespace QuizButtonDesktop
 
         private void tmrNextTeam_Tick(object sender, EventArgs e)
         {
+            if (!nextTeam())
+            {
+                tmrNextTeam.Stop();
+            }
+        }
+
+        private bool nextTeam()
+        {
             int index = this.Controls.Count - 1;
             while (index >= 0)
             {
-                if(!Controls[index].Visible)
+                if (!Controls[index].Visible)
                 {
                     Controls[index].Visible = true;
-                    return;
+                    return true;
                 }
                 index--;
             }
-            tmrNextTeam.Stop();
+            return false;
         }
 
         private void frmShowScore_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.PageDown || e.KeyCode == Keys.PageUp || e.KeyCode == Keys.Escape)
             {
-                this.Close();
-                this.Dispose();
+                if (!nextTeam())
+                {
+                    this.Close();
+                    this.Dispose();
+                }
             }
         }
     }

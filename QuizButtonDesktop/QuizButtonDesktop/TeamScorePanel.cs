@@ -31,12 +31,12 @@ namespace QuizButtonDesktop
             lblScore.Size = splitContainer2.Panel2.ClientSize;
             lblScore.Font = new Font("Arial", usableHeight, FontStyle.Bold, GraphicsUnit.Pixel);
 
-            Font teamFont = lblScore.Font;
-            while(TextRenderer.MeasureText(lblTeam.Text, teamFont).Width > lblTeam.Size.Width)
-            {
-                usableHeight--;
-                teamFont = new Font("Arial", usableHeight, FontStyle.Bold, GraphicsUnit.Pixel);
-            }
+            Font teamFont = new Font("Arial", usableHeight * 0.6f, FontStyle.Bold, GraphicsUnit.Pixel);
+            //while (TextRenderer.MeasureText(lblTeam.Text, teamFont).Width > lblTeam.Size.Width)
+            //{
+            //    usableHeight--;
+            //    teamFont = new Font("Arial", usableHeight, FontStyle.Bold, GraphicsUnit.Pixel);
+            //}
             lblTeam.Size = splitContainer2.Panel1.ClientSize;
             lblTeam.Font = teamFont;
         }
